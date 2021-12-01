@@ -24,7 +24,6 @@ export class Controller {
         this.model.items.push(list_item)
         console.log(list_item)
         document.getElementById("add-item").value = ""
-        // localStorage.setItem('test', list_item);
         view.render()
     }
 
@@ -52,8 +51,6 @@ export class Controller {
     }
 
     render() {
-
-        // this.getPhotos()
 
         this.clearToDoList();
 
@@ -109,8 +106,6 @@ export class Controller {
             if (((document.getElementById("add-item").value !== "") && (document.getElementById("add-item").value !== " "))) {
                 const item = document.getElementById("add-item").value;
                 controller.addItem(item);
-                // localStorage.setItem('test', list_item);
-                //   let localStorage.item ? [] : JSON.parse(localStorage.getItem('tasks'));
                 return false;
             }
         }

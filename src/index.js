@@ -9,6 +9,4 @@ export const view = new View(controller.model);
 
 input.onkeypress = (e) => view.addItem(e);
 
-
-
 controller.Init()
