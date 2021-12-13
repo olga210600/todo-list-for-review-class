@@ -1,46 +1,33 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-    entry: './src/index.js',
+    entry: "./src/index.ts",
     output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'bundle.js',
+        filename: "build.js"
     },
-    devServer: {
-        static: './dist',
+    resolve: {
+        extensions: [".ts", ".js"]
     },
-    mode: 'development',
     module: {
         rules: [
             {
-                test: /\.css$/i,
-                use: ["style-loader", "css-loader"],
-            },
-            {
-                test: /\.m?js$/,
-                exclude: /(node_modules|bower_components)/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: [
-                            [
-                                '@babel/preset-env',
-                                {
-                                    targets: {
-                                        esmodules: true,
-                                    },
-                                },
-                            ],
-                        ],
-                        plugins: ['@babel/plugin-proposal-class-properties']
-                    }
-                }
+                test: /\.ts?$/,
+                use: "ts-loader",
+                exclude: /node_modules/
             }
-        ],
+        ]
+    },
+    devtool: process.env.NODE_ENV === "production" ? false : "inline-source-map",
+    devServer: {
+        contentBase: "./dist",
+        stats: "errors-only",
+        compress: false,
+        host: "localhost",
+        port: 8080
     },
     plugins: [
-        new HtmlWebpackPlugin({template: './src/index.html'}),
-    ],
+        new HtmlWebpackPlugin({
+            template: "./src/index.html"
+        })
+    ]
 };
-
